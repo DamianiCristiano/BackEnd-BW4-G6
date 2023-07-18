@@ -63,4 +63,40 @@ public class EntityMethods {
             return null;
         }
 	}
+	public static void convalida(Long id) throws SQLException {
+        em.getTransaction().begin();
+        Query query = em.createQuery("UPDATE Biglietto b SET b.dataConvalida = CURRENT_DATE, b.dataScadenza=:dScad WHERE b.id = :id");
+        query.setParameter("dScad", LocalDate.now().plusDays(1));
+        query.setParameter("id", id);
+        query.executeUpdate();
+        em.getTransaction().commit();
+    }
+	public static long getTicketConvalidati(LocalDate x, LocalDate y) throws SQLException
+	{
+		Query q=em.createQuery("SELECT COUNT(b.id) FROM Biglietto b WHERE b.dataConvalida BETWEEN :x AND :y");
+		q.setParameter("x", x);
+		q.setParameter("y", y);
+		try {
+			return (Long) q.getSingleResult();
+		}catch (NoResultException e) {
+            return  0;
+        }
+	}
+	public static long getConvalidaPerMezzo(long id) throws SQLException
+	{
+		Query q=em.createQuery("SELECT COUNT(b.id) FROM Biglietto b WHERE b.dataConvalida IS NOT NULL AND b.mezzo.id = :id");
+		q.setParameter("id", id);
+		try {
+			return (long) q.getSingleResult();
+		}catch (NoResultException e) {
+            return 0;
+        }
+	}
 }
+
+
+
+
+
+
+

@@ -24,11 +24,14 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vol_seq2")
 	protected Long id;
 	
-	@Column(name="data_convalida", nullable = false)
+	@Column(name="data_convalida")
 	protected LocalDate dataConvalida;
 	
-	@Column(name="data_scadenza", nullable = false)
+	@Column(name="data_scadenza")
 	protected LocalDate dataScadenza;
+	
+	@Column(name="data_acquisto", nullable = false)
+	protected LocalDate dataAcquisto;
 	
 	@ManyToOne
 	protected Tratta tratta;
@@ -38,9 +41,9 @@ public class Ticket {
 	
 	public Ticket() {}
 	
-	public Ticket(LocalDate dataConvalida, Tratta tratta, Venditore venditore) {
+	public Ticket(LocalDate dataAcquisto, Tratta tratta, Venditore venditore) {
 		super();
-		this.dataConvalida = dataConvalida;
+		this.dataAcquisto = dataAcquisto;
 		this.tratta = tratta;
 		this.venditore = venditore;
 	}

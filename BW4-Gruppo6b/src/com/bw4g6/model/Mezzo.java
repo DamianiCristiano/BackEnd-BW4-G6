@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.bw4g6.classes.Stato;
@@ -31,12 +32,15 @@ public class Mezzo {
 	@Column(nullable = false)
 	private Stato stato;
 	
+	@ManyToOne
+	private Tratta tratta;
 	public Mezzo() {}
 	
-	public Mezzo(TipoMezzo tipoMezzo, Stato stato) {
+	public Mezzo(TipoMezzo tipoMezzo, Stato stato, Tratta tratta) {
 		super();
 		this.tipoMezzo = tipoMezzo;
 		this.stato = stato;
+		this.tratta = tratta;
 		if(this.tipoMezzo==TipoMezzo.AUTOBUS) this.nPosti=50;
 		else this.nPosti=30;
 	}

@@ -21,12 +21,9 @@ public class Abbonamento extends Ticket{
 	
 	public Abbonamento(){}
 	
-	public Abbonamento(LocalDate dataConvalida, Periodicita periodicita, Venditore venditore, Tratta tratta) {
-		super(dataConvalida, tratta, venditore);
+	public Abbonamento(LocalDate dataAcquisto, Periodicita periodicita, Venditore venditore, Tratta tratta) {
+		super(dataAcquisto, tratta, venditore);
 		this.periodicita = periodicita;
-		
-		if(this.periodicita==Periodicita.SETTIMANALE) this.dataScadenza=this.dataConvalida.plusDays(7);
-		else this.dataScadenza=this.dataConvalida.plusDays(30);
 	}
 
 	public Periodicita getPeriodicita() {
@@ -39,7 +36,7 @@ public class Abbonamento extends Ticket{
 
 	@Override
 	public String toString() {
-		return "Abbonamento [id=" + id + ", dataConvalida=" + dataConvalida + ", dataScadenza=" + dataScadenza
+		return "Abbonamento [id=" + id + ", dataAcquisto=" + dataAcquisto + ", dataScadenza=" + dataScadenza
 				+ ", periodicita=" + periodicita +"]";
 	}
 }
